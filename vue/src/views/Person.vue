@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item prop="avatar" label="头像">
                 <el-upload
-                    action="http://localhost:9991/files/upload"
+                    action="http://localhost:8080/files/upload"
                     :headers="{ token: data.user.token }"
                     :on-success="handleFileSuccess"
                     list-type="picture">

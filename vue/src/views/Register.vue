@@ -28,7 +28,7 @@ import { reactive, ref } from "vue";
 import request from "@/utils/request.js";
 import {ElMessage} from "element-plus";
 import router from "@/router/index.js";
-import {register} from "@/api/user.js";
+// import {register} from "@/api/user.js";
 
 const validatePass = (rule, value, callback) => {
   // value 表示用户输入的确认密码
