@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.model.AuditLog;
+import com.example.entity.AuditLog;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

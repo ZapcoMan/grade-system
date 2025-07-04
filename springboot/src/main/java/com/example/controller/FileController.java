@@ -3,8 +3,10 @@ package com.example.controller;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Dict;
+import com.example.annotation.AuditLogRecord;
 import com.example.common.R;
 import com.example.exception.CustomerException;
+import io.swagger.annotations.ApiOperation;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,8 @@ public class FileController {
     /**
      * 文件上传
      */
+    @ApiOperation("文件上传")
+    @AuditLogRecord(action = "文件上传", resource = "文件")
     @PostMapping("/upload")
     public R upload(@RequestParam("file") MultipartFile file) throws Exception {
         // 找到文件的位置
@@ -34,14 +38,16 @@ public class FileController {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();  // 文件的原始名称
         // 写入文件
         FileUtil.writeBytes(bytes, filePath + fileName);
-        String url = "http://localhost:9999/files/download/" + fileName;
+        String url = "http://localhost:9991/files/download/" + fileName;
         return R.success(url);
     }
 
     /**
      * 文件下载
-     * 下载路径："http://localhost:9999/files/download/404.jpg"
+     * 下载路径："<a href="http://localhost:9999/files/download/404.jpg">...</a>"
      */
+    @ApiOperation("文件下载")
+    @AuditLogRecord(action = "文件下载", resource = "文件")
     @GetMapping("/download/{fileName}")
     public void download(@PathVariable String fileName, HttpServletResponse response) throws Exception {
         // 找到文件的位置
@@ -63,6 +69,8 @@ public class FileController {
     /**
      * wang-editor编辑器文件上传接口
      */
+    @ApiOperation("wang-editor编辑器文件上传接口")
+    @AuditLogRecord(action = "wang-editor编辑器文件上传接口", resource = "文件上传")
     @PostMapping("/wang/upload")
     public R wangEditorUpload(MultipartFile file) {
         String flag = System.currentTimeMillis() + "";

@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import com.example.annotation.AuditLogRecord;
 import com.example.common.R;
+
 import com.example.entity.User;
-import com.example.service.Impl.UserServiceImpl;
+import com.example.service.impl.UserServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +30,8 @@ public class UserController {
      * @param user 待添加的用户对象，通过请求体接收
      * @return 返回添加操作的结果
      */
+    @ApiOperation("添加新用户")
+    @AuditLogRecord(action = "添加新用户", resource = "用户")
     @PostMapping("/add")
     public R add(@RequestBody User user) {
         userServiceImpl.add(user);
@@ -39,6 +44,8 @@ public class UserController {
      * @param user 待更新的用户对象，通过请求体接收
      * @return 返回更新操作的结果
      */
+    @AuditLogRecord(action = "更新用户信息", resource = "用户")
+    @ApiOperation("更新用户信息")
     @PutMapping("/update")
     public R update(@RequestBody User user) {
         userServiceImpl.update(user);
@@ -51,6 +58,9 @@ public class UserController {
      * @param id 用户ID，通过URL参数接收
      * @return 返回删除操作的结果
      */
+
+    @AuditLogRecord(action = "删除用户", resource = "用户")
+    @ApiOperation("根据用户ID删除用户")
     @DeleteMapping("/delete/{id}")
     public R delete(@PathVariable Integer id) {
         userServiceImpl.deleteById(id);
@@ -63,6 +73,8 @@ public class UserController {
      * @param list 待删除的用户列表，通过请求体接收
      * @return 返回批量删除操作的结果
      */
+    @AuditLogRecord(action = "批量删除用户", resource = "用户")
+    @ApiOperation("批量删除用户")
     @DeleteMapping("/deleteBatch")
     public R deleteBatch(@RequestBody List<User> list) {
         userServiceImpl.deleteBatch(list);
@@ -74,6 +86,8 @@ public class UserController {
      *
      * @return 返回所有用户信息列表
      */
+    @AuditLogRecord(action = "查询所有用户", resource = "用户")
+    @ApiOperation("查询所有用户")
     @GetMapping("/selectAll")
     public R selectAll() {
         List<User> userList = userServiceImpl.selectAll();
@@ -88,6 +102,8 @@ public class UserController {
      * @param user 用户对象，用于模糊查询
      * @return 返回分页查询结果，包含用户信息
      */
+    @AuditLogRecord(action = "分页查询用户信息", resource = "用户")
+    @ApiOperation("分页查询用户信息")
     @GetMapping("/selectPage")
     public R selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,

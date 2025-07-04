@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9991
 
 # 数据库配置
 spring:
@@ -7,7 +7,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: admin
-    url: jdbc:mysql://localhost:3307/mycode?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3307/intensifiedmycode?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+
 # 配置mybatis实体和xml映射
 mybatis:
   ## 映射xml
@@ -16,3 +23,6 @@ mybatis:
     # 配置日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+
+

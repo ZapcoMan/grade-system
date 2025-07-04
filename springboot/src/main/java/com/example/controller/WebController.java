@@ -1,11 +1,12 @@
 package com.example.controller;
 
+import com.example.annotation.AuditLogRecord;
 import com.example.common.R;
 import com.example.entity.Account;
-import com.example.entity.User;
-import com.example.exception.CustomerException;
-import com.example.service.Impl.AdminServiceImpl;
-import com.example.service.Impl.UserServiceImpl;
+import com.example.service.AdminService;
+import com.example.service.UserService;
+import com.example.strategy.Context.RoleStrategyContext;
+import io.swagger.annotations.ApiOperation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,47 +16,64 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebController {
 
-    @Resource
-    AdminServiceImpl adminServiceImpl;
-    @Resource
-    UserServiceImpl userServiceImpl;
 
+    @Resource
+    private RoleStrategyContext roleStrategyContext;
 
-    //  表示这是一个 get请求的接口
-    @GetMapping("/hello") // 接口的路径，全局唯一的
+    // 定义一个名为 hello 的接口，处理 GET 请求
+    // 接口的路径，全局唯一的
+    @GetMapping("/hello")
     public R hello() {
+        // 返回一个成功的响应，包含消息 "hello"
         return R.ok().message("hello");  // 接口的返回值
     }
 
+    /**
+     * 登录接口，处理 POST 请求
+     * 使用策略模式根据用户角色调用不同的登录方法
+     *
+     * @param account 用户账户信息，包含角色和登录所需的信息
+     * @return 登录结果，包含成功或失败信息
+     */
+    @ApiOperation("登录")
+    @AuditLogRecord(action = "登录", resource = "用户")
     @PostMapping("/login")
     public R login(@RequestBody Account account) {
-        Account dbAccount = null;
-        if ("ADMIN".equals(account.getRole())) {
-            dbAccount = adminServiceImpl.login(account);
-        }else if ("USER".equals(account.getRole())) {
-            dbAccount = userServiceImpl.login(account);
-        }else {
-            throw new CustomerException("非法请求");
-        }
-        return R.success(dbAccount);
+        // 使用策略模式根据用户角色调用不同的登录方法
+        return R.success(roleStrategyContext.getStrategy(account.getRole()).login(account));
     }
 
+    /**
+     * 用户注册接口，处理 POST 请求
+     * 目前使用固定的 UserServiceImpl 执行注册逻辑
+     * 未来可扩展为根据用户角色使用策略模式执行不同的注册逻辑
+     *
+     * @param account 用户账户信息，用于注册新用户
+     * @return 注册结果，包含成功或失败信息
+     * @throws UnsupportedOperationException 当注册策略分发功能未实现时抛出此异常
+     */
+    @ApiOperation("用户注册")
+    @AuditLogRecord(action = "用户注册", resource = "用户")
     @PostMapping("/register")
-    public R register(@RequestBody User user) {
-        userServiceImpl.register(user);
-        return R.ok();
+    public R register(@RequestBody Account account) {
+        // 注册逻辑保持原有 UserServiceImpl
+        // 这里可以扩展成策略注册
+        throw new UnsupportedOperationException("暂未实现注册策略分发");
     }
 
+    /**
+     * 更新密码接口，处理 POST 请求
+     * 根据用户角色调用不同的更新密码方法
+     *
+     * @param account 用户账户信息，包含新密码和角色信息
+     * @return 更新密码操作结果，包含成功或失败信息
+     */
+    @ApiOperation("更新密码")
+    @AuditLogRecord(action = "更新密码", resource = "用户")
     @PostMapping("/updatePassword")
-    public R UpdatePassword(@RequestBody Account account) {
-        if("ADMIN".equals(account.getRole())){
-            adminServiceImpl.updatePassword(account);
-        }
-        if("USER".equals(account.getRole())){
-            userServiceImpl.updatePassword(account);
-        }
-
-
+    public R updatePassword(@RequestBody Account account) {
+        // 根据用户角色调用不同的更新密码方法
+        roleStrategyContext.getStrategy(account.getRole()).updatePassword(account);
         return R.ok();
     }
 

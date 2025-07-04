@@ -1,4 +1,4 @@
-package com.example.service.Impl;
+package com.example.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.example.entity.Account;
@@ -22,6 +22,13 @@ public class AdminServiceImpl implements AdminService {
     @Resource AdminMapper adminMapper;
     // 日志对象，用于记录系统日志
     private static final Log log = LogFactory.getLog(AdminServiceImpl.class);
+
+    /**
+     * 添加管理员账户
+     *
+     * @param admin 待添加的管理员对象，包含用户名和密码等信息
+     * @throws CustomerException 如果用户名已存在，则抛出此异常
+     */
     public void add(Admin admin) {
         // 根据新的账号查询数据库  是否存在同样账号的数据
         Admin dbAdmin = adminMapper.selectByUsername(admin.getUsername());
@@ -36,28 +43,62 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.insert(admin);
     }
 
+    /**
+     * 更新管理员信息
+     *
+     * @param admin 包含更新信息的管理员对象
+     */
     public void update(Admin admin) {
         adminMapper.updateById(admin);
     }
 
+    /**
+     * 根据ID删除管理员账户
+     *
+     * @param id 要删除的管理员账户ID
+     */
     public void deleteById(Integer id) {
         adminMapper.deleteById(id);
     }
 
+    /**
+     * 批量删除管理员账户
+     *
+     * @param list 包含多个待删除的管理员对象的列表
+     */
     public void deleteBatch(List<Admin> list) {
         for (Admin admin : list) {
             this.deleteById(admin.getId());
         }
     }
 
+    /**
+     * 根据ID查询管理员信息
+     *
+     * @param id 要查询的管理员账户ID
+     * @return 查询到的管理员对象
+     */
     public Admin selectById(String id) {
         return adminMapper.selectById(id);
     }
 
+    /**
+     * 查询所有管理员信息
+     *
+     * @return 包含所有管理员对象的列表
+     */
     public List<Admin> selectAll() {
         return adminMapper.selectAll(null);
     }
 
+    /**
+     * 分页查询管理员信息
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页大小
+     * @param admin    用于查询的管理员对象，可以为null
+     * @return 包含分页信息的PageInfo对象
+     */
     public PageInfo<Admin> selectPage(Integer pageNum, Integer pageSize, Admin admin) {
         // 开启分页查询
         PageHelper.startPage(pageNum, pageSize);

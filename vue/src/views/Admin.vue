@@ -83,7 +83,7 @@ import {Search} from "@element-plus/icons-vue";
 import request from "@/utils/request.js";
 import {ElMessage,ElMessageBox} from "element-plus";
 
-
+// 创建一个响应式数据对象，用于存储用户相关数据和操作状态
 const data = reactive({
   user: JSON.parse(localStorage.getItem('code_user') || "{}"),
   username: null,
@@ -108,7 +108,10 @@ const data = reactive({
   rows: []
 })
 
+// 创建一个对表单的引用，用于表单验证
 const formRef = ref()
+
+// 加载用户数据的方法
 const load = () => {
   request.get('/admin/selectPage', {
     params: {
@@ -127,18 +130,23 @@ const load = () => {
     }
   })
 }
+// 初始加载
 load()
+
+// 重置搜索条件并重新加载数据
 const reset = () => {
   data.username = null
   data.name = null
   load()
 }
 
+// 显示添加用户的表单
 const handleAdd = () => {
   data.formVisible = true
   data.form = {}
 }
 
+// 添加用户的方法
 const add = () => {
   // formRef 是表单的引用
   formRef.value.validate((valid) => {
@@ -156,66 +164,13 @@ const add = () => {
   })
 }
 
+// 显示编辑用户的表单
 const handleEdit = (row) => {
   data.form = JSON.parse(JSON.stringify(row))  // 深度拷贝数据
   data.formVisible = true
 }
 
-const update = () => {
-  // formRef 是表单的引用
-  formRef.value.validate((valid) => {
-    if (valid) {   // 验证通过的情况下
-      request.put('/admin/update', data.form).then(res => {
-        if (res.code === 20000) {
-          data.formVisible = false
-          ElMessage.success('修改成功')
-          load()
-        } else {
-          ElMessage.error(res.message)
-        }
-      })
-    }
-  })
-}
-
-const save = () => {
-  data.form.id ? update() : add()
-}
-
-const del = (id) => {
-  ElMessageBox.confirm('删除后无法恢复，您确认删除吗？', '删除确认', { type: 'warning' }).then(res => {
-    request.delete('/admin/delete/' + id).then(res => {
-      if (res.code === 20000) {
-        ElMessage.success('删除成功')
-        load()
-      } else {
-        ElMessage.error(res.message)
-      }
-    })
-  }).catch(err => {})
-}
-
-const handleSelectionChange = (rows) => {  // rows 就是实际选择的数组
-  data.rows = rows
-}
-
-const deleteBatch = () => {
-  if (data.rows.length === 0) {
-    ElMessage.warning('请选择数据')
-    return
-  }
-  ElMessageBox.confirm('删除后无法恢复，您确认删除吗？', '删除确认', { type: 'warning' }).then(res => {
-    request.delete('/admin/deleteBatch', { data: data.rows }).then(res => {
-      if (res.code === 20000) {
-        ElMessage.success('批量删除成功')
-        load()
-      } else {
-        ElMessage.error(res.message)
-      }
-    })
-  }).catch(err => {})
-}
-
+// 更新用户的方法
 const handleFileSuccess = (res) => {
   data.form.avatar = res.data
 }

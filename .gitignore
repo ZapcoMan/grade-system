@@ -21,20 +21,20 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
-
+*.idea/
 ### VS Code ###
 .vscode/
-!*.iml
-./vue/node_modules/
-
+*.iml
+vue/node_modules/*
+node_modules/
 ### Mac OS ###
 .DS_Store
-.idea
+
 springboot/target/*
 
 # Compiled class file
-*.class
-springboot/target/*
+!*.class
+
 # Log file
 *.log
 

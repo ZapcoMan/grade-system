@@ -8,6 +8,13 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' // 对�
 
 // https://vite.dev/config/
 export default defineConfig({
+  server:{
+    host: '0.0.0.0',
+    port: 5173,
+  },
+  define: {
+    __BASE_API__: JSON.stringify(process.env.VITE_BASE_API)
+  },
   plugins: [
     vue(),
     //element-plus按需导入
