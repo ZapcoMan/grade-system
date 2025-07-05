@@ -30,23 +30,23 @@
 
 #### 主要模块
 
-| 包名              | 功能描述 |
-|-------------------|----------|
-| `annotation`      | 自定义注解，如 [[@AuditLogRecord](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\annotation\AuditLogRecord.java#L15-L20)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\annotation\AuditLogRecord.java) 用于标记需要记录日志的方法 |
-| `aspect`          | 切面类，如 [[AuditLogAspect](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\aspect\AuditLogAspect.java#L25-L74)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\aspect\AuditLogAspect.java) 实现操作日志记录逻辑 |
-| `common`          | 通用配置类，包括跨域配置、拦截器、统一返回封装等 |
-| `config`          | 系统配置类，如安全配置、Redis 配置、Jackson 序列化配置等 |
-| `controller`      | 控制器类，处理 HTTP 请求，包含管理员、用户、文件上传等接口 |
-| `dto`             | 数据传输对象，用于接收请求参数 |
-| `entity`          | 实体类，与数据库表一一映射 |
-| `enums`           | 枚举类，如角色枚举、结果状态码等 |
-| `exception`       | 异常处理类，统一处理系统异常 |
-| [mapper](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\service\impl\CourseServiceImpl.java#L13-L14)          | MyBatis 映射接口，用于数据库操作 |
-| `security`        | 安全相关类，如 JWT 过滤器、鉴权逻辑 |
-| `service`         | 业务逻辑接口及其实现类 |
-| `strategy`        | 策略模式实现的扩展逻辑 |
-| `utils`           | 工具类，如 [[TokenUtils](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\utils\TokenUtils.java#L21-L80)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\utils\TokenUtils.java) 处理 JWT 令牌 |
-| `SpringbootApplication.java` | Spring Boot 启动类 |
+| 包名                                                                                                                                            | 功能描述                                                                                                                                                                                                                                                                                              |
+|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `annotation`                                                                                                                                  | 自定义注解，如 [[@AuditLogRecord](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\annotation\AuditLogRecord.java#L15-L20)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\annotation\AuditLogRecord.java) 用于标记需要记录日志的方法 |
+| `aspect`                                                                                                                                      | 切面类，如 [[AuditLogAspect](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\aspect\AuditLogAspect.java#L25-L74)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\aspect\AuditLogAspect.java) 实现操作日志记录逻辑               |
+| `common`                                                                                                                                      | 通用配置类，包括跨域配置、拦截器、统一返回封装等                                                                                                                                                                                                                                                                          |
+| `config`                                                                                                                                      | 系统配置类，如安全配置、Redis 配置、Jackson 序列化配置等                                                                                                                                                                                                                                                               |
+| `controller`                                                                                                                                  | 控制器类，处理 HTTP 请求，包含管理员、用户、文件上传等接口                                                                                                                                                                                                                                                                  |
+| `dto`                                                                                                                                         | 数据传输对象，用于接收请求参数                                                                                                                                                                                                                                                                                   |
+| `entity`                                                                                                                                      | 实体类，与数据库表一一映射                                                                                                                                                                                                                                                                                     |
+| `enums`                                                                                                                                       | 枚举类，如角色枚举、结果状态码等                                                                                                                                                                                                                                                                                  |
+| `exception`                                                                                                                                   | 异常处理类，统一处理系统异常                                                                                                                                                                                                                                                                                    |
+| [mapper](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\service\impl\CourseServiceImpl.java#L13-L14) | MyBatis 映射接口，用于数据库操作                                                                                                                                                                                                                                                                              |
+| `security`                                                                                                                                    | 安全相关类，如 JWT 过滤器、鉴权逻辑                                                                                                                                                                                                                                                                              |
+| `service`                                                                                                                                     | 业务逻辑接口及其实现类                                                                                                                                                                                                                                                                                       |
+| `strategy`                                                                                                                                    | 策略模式实现的扩展逻辑                                                                                                                                                                                                                                                                                       |
+| `utils`                                                                                                                                       | 工具类，如 [[TokenUtils](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\utils\TokenUtils.java#L21-L80)](file://C:\Users\Administrator\Desktop\grade-system\springboot\src\main\java\com\example\utils\TokenUtils.java) 处理 JWT 令牌                              |
+| `SpringbootApplication.java`                                                                                                                  | Spring Boot 启动类                                                                                                                                                                                                                                                                                   |
 
 #### 配置文件
 
@@ -63,14 +63,15 @@
 
 #### 主要模块
 
-| 目录                | 功能描述 |
-|---------------------|----------|
-| `src/api`           | API 接口封装，如 `user.js` 定义用户相关的请求 |
-| `src/assets/css`    | 全局样式文件和 SCSS 变量 |
-| `src/router/index.js` | Vue 路由配置 |
-| `src/utils/request.js` | 封装 Axios 请求 |
-| `src/views/`        | 页面组件目录，包括：
-  - `Login.vue` 登录页  
+| 目录                     | 功能描述                           |
+|------------------------|--------------------------------|
+| `src/api`              | API 接口封装，如 `user.js` 定义用户相关的请求 |
+| `src/assets/css`       | 全局样式文件和 SCSS 变量                |
+| `src/router/index.js`  | Vue 路由配置                       |
+| `src/utils/request.js` | 封装 Axios 请求                    |
+| `src/views/`           | 页面组件目录，包括：                     |
+
+- `Login.vue` 登录页  
   - `Register.vue` 注册页  
   - `Home.vue` 主页  
   - `User.vue` 用户管理  
@@ -111,14 +112,14 @@
 
 ## 功能列表
 
-| 功能模块       | 描述 |
-|----------------|------|
-| 用户登录       | 使用 JWT 进行身份验证，支持多角色登录 |
-| 成绩管理       | 支持查看、添加、修改、删除学生成绩 |
-| 通知公告       | 管理员可以发布通知，用户可查看 |
-| 日志记录       | 所有操作记录在审计日志中，可通过注解灵活控制 |
-| 文件上传       | 支持头像上传、批量 Excel 导入成绩 |
-| 权限控制       | 不同角色（如管理员、教师、学生）拥有不同权限 |
+| 功能模块 | 描述                     |
+|------|------------------------|
+| 用户登录 | 使用 JWT 进行身份验证，支持多角色登录  |
+| 成绩管理 | 支持查看、添加、修改、删除学生成绩      |
+| 通知公告 | 管理员可以发布通知，用户可查看        |
+| 日志记录 | 所有操作记录在审计日志中，可通过注解灵活控制 |
+| 文件上传 | 支持头像上传、批量 Excel 导入成绩   |
+| 权限控制 | 不同角色（如管理员、教师、学生）拥有不同权限 |
 
 ---
 
