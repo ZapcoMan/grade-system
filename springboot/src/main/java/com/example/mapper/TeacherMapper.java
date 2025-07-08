@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 
+import com.example.entity.Account;
 import com.example.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -59,4 +60,7 @@ public interface TeacherMapper {
      * @return 返回对应的Teacher对象，如果找不到则返回null
      */
     Teacher findByUserId(Long userId);
+
+
+
 }
