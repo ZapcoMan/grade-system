@@ -3,6 +3,7 @@ package com.example.strategy.impl;
 import com.example.entity.Account;
 import com.example.enums.RoleEnum;
 import com.example.service.TeacherService;
+import com.example.service.UserService;
 import com.example.strategy.RoleStrategy;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class TeacherStrategy implements RoleStrategy {
 
     @Resource
-    private TeacherService teacherService;
+    private UserService teacherService;
 
     @Override
     public String getRole() {
@@ -21,11 +22,11 @@ public class TeacherStrategy implements RoleStrategy {
 
     @Override
     public Account login(Account account) {
-        return null;
+        return teacherService.login(account);
     }
 
     @Override
     public void updatePassword(Account account) {
-
+        teacherService.updatePassword(account);
     }
 }
