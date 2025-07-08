@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAccountServiceImpl implements AccountService {
 
-    @Resource
-    private UserMapper userMapper;
+
 
     @Resource
     private UserService userService;
@@ -39,6 +38,6 @@ public class UserAccountServiceImpl implements AccountService {
 
     @Override
     public void register(User user) {
-        userMapper.insert(user);
+        userService.insert(user);
     }
 }
