@@ -172,4 +172,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updateById(user);
     }
 
+    @Override
+    public void insert(User user) {
+        userMapper.insert(user);
+    }
+
 }
