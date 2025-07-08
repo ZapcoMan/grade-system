@@ -21,11 +21,11 @@ public class TeacherStrategy implements RoleStrategy {
 
     @Override
     public Account login(Account account) {
-        return teacherService.login(account);
+        return null;
     }
 
     @Override
     public void updatePassword(Account account) {
-        teacherService.updatePassword(account);
+
     }
 }
