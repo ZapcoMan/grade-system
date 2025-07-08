@@ -1,9 +1,7 @@
 package com.example.service.impl;
 
 
-import com.example.entity.Account;
 import com.example.entity.Teacher;
-import com.example.exception.CustomerException;
 import com.example.mapper.TeacherMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.TeacherService;
@@ -18,8 +16,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Resource
     private TeacherMapper teacherMapper;
 
-    @Resource
-    private UserMapper userMapper;
+
 
     @Override
     public Teacher getById(Long id) {

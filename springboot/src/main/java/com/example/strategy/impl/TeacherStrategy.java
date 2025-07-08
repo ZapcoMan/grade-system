@@ -2,11 +2,9 @@ package com.example.strategy.impl;
 
 import com.example.entity.Account;
 import com.example.enums.RoleEnum;
-import com.example.service.TeacherService;
 import com.example.service.UserService;
 import com.example.strategy.RoleStrategy;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
