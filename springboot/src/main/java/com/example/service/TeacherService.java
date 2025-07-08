@@ -18,5 +18,5 @@ public interface TeacherService {
     void delete(Long id);
 
     Teacher getByUserId(Long userId);
-    
+
 }
