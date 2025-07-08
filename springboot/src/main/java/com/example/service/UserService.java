@@ -77,4 +77,6 @@ public interface UserService {
      * @param account 包含用户登录凭证的对象，用于验证用户身份
      */
     void updatePassword(Account account);
+
+    void insert(User user);
 }

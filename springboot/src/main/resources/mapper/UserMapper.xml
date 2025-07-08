@@ -35,5 +35,7 @@
         <!-- 根据id进行条件更新 -->
         where id = #{id}
     </update>
-
+    <update id="updatePassword">
+        UPDATE user SET password = #{password} WHERE username = #{username}
+    </update>
 </mapper>

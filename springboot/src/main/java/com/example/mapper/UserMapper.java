@@ -66,5 +66,7 @@ public interface UserMapper {
      */
     @Select("select * from `user` where id = #{id}")
     User selectById(String id);
+
+    void updatePassword(String username, String newpassword);
 }
 
