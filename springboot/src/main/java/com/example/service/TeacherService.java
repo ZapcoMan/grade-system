@@ -1,6 +1,7 @@
 package com.example.service;
 
 
+import com.example.entity.Account;
 import com.example.entity.Teacher;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface TeacherService {
     void delete(Long id);
 
     Teacher getByUserId(Long userId);
+
+
+
+
 }
