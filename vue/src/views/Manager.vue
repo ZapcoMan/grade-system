@@ -44,18 +44,18 @@
             </template>
             <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
             <el-menu-item index="/manager/user">普通用户(学生)信息</el-menu-item>
+            <el-menu-item index="/manager/teacher" v-if="data.user.role === 'ADMIN' ">教师管理</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
             <template #title>
               <el-icon><location /></el-icon>
               <span>功能模块</span>
             </template>
-            <el-menu-item index="/manager/ask" v-if="data.user.role === 'USER' || data.user.role === 'ADMIN'">提问</el-menu-item>
+<!--            <el-menu-item index="/manager/ask" v-if="data.user.role === 'USER' || data.user.role === 'ADMIN'">提问</el-menu-item>-->
 <!--            <el-menu-item index="/manager/teacher" v-if="data.user.role === 'TEACHER' || data.user.role === 'ADMIN'">答疑</el-menu-item>-->
-            <el-menu-item index="/manager/teacher" v-if="data.user.role === 'ADMIN' ">教师管理</el-menu-item>
             <el-menu-item index="/manager/course" v-if="data.user.role === 'TEACHER' ">课程管理</el-menu-item>
             <el-menu-item index="/manager/score" v-if="data.user.role === 'TEACHER' ">成绩管理</el-menu-item>
-            <el-menu-item index="/manager/message">留言板</el-menu-item>
+<!--            <el-menu-item index="/manager/message">留言板</el-menu-item>-->
           </el-sub-menu>
         </el-menu>
       </div>
