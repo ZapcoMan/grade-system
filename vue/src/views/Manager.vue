@@ -42,8 +42,8 @@
               <el-icon><User /></el-icon>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
-            <el-menu-item index="/manager/user">普通用户(学生)信息</el-menu-item>
+            <el-menu-item index="/manager/admin" v-if="data.user.role === 'ADMIN' ">管理员信息</el-menu-item>
+            <el-menu-item index="/manager/user" v-if="data.user.role === 'ADMIN' ">普通用户(学生)信息</el-menu-item>
             <el-menu-item index="/manager/teacher" v-if="data.user.role === 'ADMIN' ">教师管理</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
@@ -54,7 +54,9 @@
 <!--            <el-menu-item index="/manager/ask" v-if="data.user.role === 'USER' || data.user.role === 'ADMIN'">提问</el-menu-item>-->
 <!--            <el-menu-item index="/manager/teacher" v-if="data.user.role === 'TEACHER' || data.user.role === 'ADMIN'">答疑</el-menu-item>-->
             <el-menu-item index="/manager/course" v-if="data.user.role === 'TEACHER' ">课程管理</el-menu-item>
+            <el-menu-item index="/manager/course" v-if="data.user.role === 'USER' ">我的课程</el-menu-item>
             <el-menu-item index="/manager/score" v-if="data.user.role === 'TEACHER' ">成绩管理</el-menu-item>
+            <el-menu-item index="/manager/score" v-if="data.user.role === 'USER' ">我的成绩</el-menu-item>
 <!--            <el-menu-item index="/manager/message">留言板</el-menu-item>-->
           </el-sub-menu>
         </el-menu>
