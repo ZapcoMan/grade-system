@@ -29,7 +29,7 @@ const router = createRouter({
                 // 教师
                 {path: 'teacher', meta: {name: '教师管理'}, component: () => import('../views/Teacher.vue')},
                 {path: 'course', meta: {name: '课程管理'}, component: () => import('../views/Course.vue')},
-                {path: 'score', meta: {name: '成绩管理'}, component: () => import('../views/Score.vue')}
+                {path: 'score', meta: {name: '成绩管理'}, component: () => import('../views/Score.vue')},
 
 
             ]
