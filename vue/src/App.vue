@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- 主题切换按钮 -->
     <!-- 主题切换开关 -->
       <el-switch
           v-model="themeMode"
@@ -39,7 +38,7 @@ const applyTheme = (mode) => {
   } else {
     document.body.style.setProperty('--menu-bg', '#3a456b');
     document.body.style.setProperty('--bg-color', '#f9fbff');
-    document.body.style.setProperty('--text-color', '#2e3440');
+    document.body.style.setProperty('--text-color', '#1b0ca9');
     document.body.style.setProperty('--text-color-light', '#7f8db0');
     document.body.style.setProperty('--border-color', '#d6ddee');
   }
