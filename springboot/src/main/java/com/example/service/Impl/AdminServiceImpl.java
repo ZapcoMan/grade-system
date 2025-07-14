@@ -160,13 +160,16 @@ public class AdminServiceImpl implements AdminService {
         }
         //判断原密码是否正确
         Account currentUser = TokenUtils.getCurrentUser();
-        if (!account.getPassword().equals(currentUser.getPassword())) {
+        if (currentUser != null && !account.getPassword().equals(currentUser.getPassword())) {
             throw new CustomerException("500", "原密码输入错误");
         }
         //开始更新密码
         //MD5 加密
         account.setNewpassword(DigestUtil.md5Hex(account.getNewpassword()));
-        Admin admin = adminMapper.selectById(currentUser.getId().toString());
+        Admin admin = null;
+        if (currentUser != null) {
+            admin = adminMapper.selectById(currentUser.getId().toString());
+        }
         admin.setPassword(account.getNewpassword());
         adminMapper.updateById(admin);
 
