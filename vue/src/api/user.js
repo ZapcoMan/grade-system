@@ -27,5 +27,13 @@ export const deleteUsers = (rows) => {
 }
 
 export const register = (data) =>{
-    return request.post('/register', data.form)
+    // 定义一个 data
+    data = {
+        username: data.username,
+        password: data.password,
+        newPassword: data.newPassword,
+        role: "USER",
+
+    }
+    return request.post('/register', data)
 }
