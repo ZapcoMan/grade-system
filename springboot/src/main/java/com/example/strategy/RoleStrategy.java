@@ -8,4 +8,6 @@ public interface RoleStrategy {
     Account login(Account account);
 
     void updatePassword(Account account);
+
+    void register(Account account);
 }
