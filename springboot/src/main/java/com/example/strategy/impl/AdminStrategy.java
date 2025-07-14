@@ -1,7 +1,6 @@
 package com.example.strategy.impl;
 
 import com.example.entity.Account;
-import com.example.entity.Admin;
 import com.example.enums.RoleEnum;
 import com.example.service.AdminService;
 import com.example.strategy.RoleStrategy;

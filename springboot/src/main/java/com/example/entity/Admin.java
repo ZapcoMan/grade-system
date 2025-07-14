@@ -1,10 +1,12 @@
 package com.example.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 管理员信息
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Admin extends Account {
     private Integer id;
