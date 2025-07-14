@@ -13,7 +13,7 @@
                     placeholder="请输入密码"/>
         </el-form-item>
         <el-form-item prop="confirmPassword">
-          <el-input size="large" show-password v-model="data.form.confirmPassword" autocomplete="off" prefix-icon="Lock"
+          <el-input size="large" show-password v-model="data.form.newpassword" autocomplete="off" prefix-icon="Lock"
                     placeholder="请再次确认密码"/>
         </el-form-item>
         <div style="margin-bottom: 20px">
@@ -58,7 +58,7 @@ const data = reactive({
     password: [
       {required: true, message: '请输入密码', trigger: 'blur'}
     ],
-    confirmPassword: [
+    newpassword: [
       {required: true, message: '请再次确认密码', trigger: 'blur'},
       {validator: validatePass, trigger: 'blur'}
     ]
