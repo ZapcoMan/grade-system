@@ -8,11 +8,13 @@ import com.example.service.UserService;
 import com.example.strategy.Context.RoleStrategyContext;
 import io.swagger.annotations.ApiOperation;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class WebController {
 
@@ -58,7 +60,15 @@ public class WebController {
     public R register(@RequestBody Account account) {
         // 注册逻辑保持原有 UserServiceImpl
         // 这里可以扩展成策略注册
-        throw new UnsupportedOperationException("暂未实现注册策略分发");
+
+        try{
+            roleStrategyContext.getStrategy(account.getRole()).register(account);
+        }catch (UnsupportedOperationException e){
+            log.warn(e.getMessage());
+        }
+            return R.ok();
+
+
     }
 
     /**
