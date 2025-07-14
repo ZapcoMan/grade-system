@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.annotation.AuditLogRecord;
 import com.example.common.R;
 import com.example.entity.Account;
+import com.example.enums.RoleEnum;
 import com.example.service.AdminService;
 import com.example.service.UserService;
 import com.example.strategy.Context.RoleStrategyContext;
@@ -60,7 +61,11 @@ public class WebController {
     public R register(@RequestBody Account account) {
         // 注册逻辑保持原有 UserServiceImpl
         // 这里可以扩展成策略注册
-
+        String role = account.getRole();
+        // 只允许 USER 注册，其他角色禁止
+        if (!RoleEnum.USER.getCode().equals(role)) {
+            return R.error("仅允许学生注册，教师与管理员请联系教务处添加账号");
+        }
         try{
             roleStrategyContext.getStrategy(account.getRole()).register(account);
         }catch (UnsupportedOperationException e){
