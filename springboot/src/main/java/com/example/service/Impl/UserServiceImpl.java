@@ -140,8 +140,6 @@ public class UserServiceImpl implements UserService {
         // 获取输入的密码和数据库中的密码
         String InputPassWord = account.getPassword();
         String dbAdminPassword = dbUser.getPassword();
-
-
         // 生成输入密码的摘要
         String inputHash = DigestUtil.md5Hex(InputPassWord);
         // 验证密码是否匹配
@@ -149,6 +147,7 @@ public class UserServiceImpl implements UserService {
         log.info("密码验证" + isValid + "一致");
         // 验证密码是否正确
         if (!isValid) {
+            log.warn("账号或密码错误");
             throw new CustomerException("账号或密码错误");
         }
         // 创建token并返回给前端
@@ -156,6 +155,7 @@ public class UserServiceImpl implements UserService {
         dbUser.setToken(token);
         // 返回登录成功的用户信息
         return dbUser;
+
     }
 
     /**
@@ -182,17 +182,22 @@ public class UserServiceImpl implements UserService {
         }
         //判断原密码是否正确
         Account currentUser = TokenUtils.getCurrentUser();
-        if (!account.getPassword().equals(currentUser.getPassword())) {
+        if (currentUser != null && !account.getPassword().equals(currentUser.getPassword())) {
             throw new CustomerException("500", "原密码输入错误");
         }
         //开始更新密码
 
 
         // 根据当前用户的ID从数据库中选择用户信息
-        User user = userMapper.selectById(currentUser.getId().toString());
+        User user = null;
+        if (currentUser != null) {
+            user = userMapper.selectById(currentUser.getId().toString());
+        }
 
         // 设置用户的密码为新的密码
-        user.setPassword(DigestUtil.md5Hex(account.getNewpassword()));
+        if (user != null) {
+            user.setPassword(DigestUtil.md5Hex(account.getNewpassword()));
+        }
 
         // 更新数据库中的用户信息
         userMapper.updateById(user);
