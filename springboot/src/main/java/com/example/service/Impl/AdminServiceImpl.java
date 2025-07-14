@@ -170,7 +170,9 @@ public class AdminServiceImpl implements AdminService {
         if (currentUser != null) {
             admin = adminMapper.selectById(currentUser.getId().toString());
         }
-        admin.setPassword(account.getNewpassword());
+        if (admin != null) {
+            admin.setPassword(account.getNewpassword());
+        }
         adminMapper.updateById(admin);
 
     }
