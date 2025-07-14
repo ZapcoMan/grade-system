@@ -6,8 +6,10 @@ import com.example.enums.RoleEnum;
 import com.example.service.UserService;
 import com.example.strategy.RoleStrategy;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class TeacherStrategy implements RoleStrategy {
 
@@ -31,10 +33,7 @@ public class TeacherStrategy implements RoleStrategy {
 
     @Override
     public void register(Account account) {
-        // 新建一个Admin对象 从 account 中取出一个admin 对象来
-        User user = new User();
-        user.setUsername(account.getUsername());
-        user.setPassword(account.getPassword());
-        teacherService.add(user);
+        log.info("教师账号不支持自助注册，请从后台添加");
+        throw new UnsupportedOperationException("教师账号不支持自助注册，请从后台添加");
     }
 }
