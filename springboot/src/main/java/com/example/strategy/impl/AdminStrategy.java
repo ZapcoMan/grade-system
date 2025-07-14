@@ -5,9 +5,11 @@ import com.example.entity.Admin;
 import com.example.enums.RoleEnum;
 import com.example.service.AdminService;
 import com.example.strategy.RoleStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class AdminStrategy implements RoleStrategy {
 
@@ -31,11 +33,8 @@ public class AdminStrategy implements RoleStrategy {
 
     @Override
     public void register(Account account) {
-        // 新建一个Admin对象 从 account 中取出一个admin 对象来
-        Admin admin = new Admin();
-        admin.setUsername(account.getUsername());
-        admin.setPassword(account.getPassword());
-        adminService.add(admin);
+        log.info("管理员账号不支持自助注册，请从后台添加");
+        throw new UnsupportedOperationException("管理员账号不支持自助注册，请从后台添加");
     }
 }
 
