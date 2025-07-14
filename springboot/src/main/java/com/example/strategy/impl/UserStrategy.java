@@ -35,7 +35,7 @@ public class UserStrategy implements RoleStrategy {
         User user = new User();
         user.setUsername(account.getUsername());
         user.setPassword(account.getPassword());
-        userService.add(user);
+        userService.register(user);
     }
 }
 
