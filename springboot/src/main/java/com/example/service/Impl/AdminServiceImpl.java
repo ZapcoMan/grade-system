@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.example.exception.CustomerException;
@@ -10,16 +11,17 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
-import org.springframework.stereotype.Service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import cn.hutool.crypto.digest.DigestUtil;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Resource AdminMapper adminMapper;
+    @Resource
+    AdminMapper adminMapper;
     // 日志对象，用于记录系统日志
     private static final Log log = LogFactory.getLog(AdminServiceImpl.class);
 
@@ -37,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
         }
         // 默认密码
         if (StrUtil.isBlank(admin.getPassword())) {
-            admin.setPassword("123456");
+            admin.setPassword(DigestUtil.md5Hex("123456"));
         }
         admin.setRole("ADMIN");
         adminMapper.insert(admin);
@@ -128,7 +130,7 @@ public class AdminServiceImpl implements AdminService {
         String inputHash = DigestUtil.md5Hex(InputPassWord);
         // 验证密码是否匹配
         boolean isValid = dbAdminPassword.equals(inputHash);
-        log.info("密码验证"+isValid+"一致");
+        log.info("密码验证" + isValid + "一致");
 
         // 如果密码不正确，抛出异常
         if (!isValid) {
@@ -153,12 +155,12 @@ public class AdminServiceImpl implements AdminService {
      */
     public void updatePassword(Account account) {
         //判断新密码和旧密码是否相等
-        if(!account.getNewpassword().equals(account.getNew2password())){
-            throw  new CustomerException("500","你两次输入的密码不一致");
+        if (!account.getNewpassword().equals(account.getNew2password())) {
+            throw new CustomerException("500", "你两次输入的密码不一致");
         }
         //判断原密码是否正确
         Account currentUser = TokenUtils.getCurrentUser();
-        if(!account.getPassword().equals(currentUser.getPassword())){
+        if (!account.getPassword().equals(currentUser.getPassword())) {
             throw new CustomerException("500", "原密码输入错误");
         }
         //开始更新密码
@@ -167,6 +169,7 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = adminMapper.selectById(currentUser.getId().toString());
         admin.setPassword(account.getNewpassword());
         adminMapper.updateById(admin);
+
     }
 
 
